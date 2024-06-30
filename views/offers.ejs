@@ -1,0 +1,53 @@
+<%- include('_header') -%>
+  <h1>JOBS</h1>
+  <div class="d-flex flex-row flex-wrap gap-3 justify-content-between">
+    <% scrap.forEach(function(scp){ %>
+      <div class="card w-100">
+        <div class="card-header">
+          <p>
+            <span><%- scp.source %></span>
+            <span>
+              <%- scp.scraped %>:
+            </span>
+            <span>Found: (<strong><%- scp.jobs.length %></strong>) jobs</span>
+          </p>
+        </div>
+        <div class="card-body">
+          <div class="d-flex flex-row flex-wrap gap-3">
+            <% scp.jobs.forEach(function(job){ %>
+              <div class="card w-25">
+                <div class="card-header">
+                  <h3 class="text-truncate"><%- job.title %></h3>
+                </div>
+                <div class="card-body">
+                  <p>
+                    <span>Company :</span><strong><%- job.company %></strong>
+                  </p>
+                  <p>
+                    <span>Job Date :</span><strong><%- job.date %></strong>
+                  </p>
+                  <p>
+                    <span>Location :</span><strong><%- job.location %></strong>
+                  </p>
+                  <p class="text-truncate">
+                    <%- job.description %>
+                  </p>
+                  <p><a href="<%- job.link %>" target="_blank">link</a></p>
+                  <p>
+                    <span>Validated ? </span><strong><%- job.validated %></strong>
+                  </p>
+                </div>
+                <div class="card-footer">
+                  <button type="button" class="btn btn-primary validate" data-scpid="<%=scp._id%>"
+                    data-jobid="<%=job._id%>">
+                    <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                    Validate</button>
+                </div>
+              </div>
+              <% }); %>
+          </div>
+        </div>
+      </div>
+      <% }); %>
+  </div>
+  <%- include('_footer') -%>
